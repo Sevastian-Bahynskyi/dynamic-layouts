@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 interface SquareProps {
   size: number;
@@ -21,7 +21,6 @@ const SquaredLayout: React.FC<SquaredLayoutProps> = ({
   colorChangeInterval,
   squareColor = "transparent",
 }) => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const [numSquares, setNumSquares] = useState(0);
   const [squareSize, setSquareSize] = useState(0);
   const [squareStates, setSquareStates] = useState<{ isPainted: boolean; color: string }[]>([]);
@@ -29,12 +28,10 @@ const SquaredLayout: React.FC<SquaredLayoutProps> = ({
 
   // Function to calculate square size and total number of squares dynamically
   const calculateSquares = () => {
-    if (!containerRef.current) return;
-
-    const containerWidth = containerRef.current.offsetWidth;
-    const containerHeight = containerRef.current.offsetHeight;
 
     let targetSquaresPerRow;
+    const containerWidth = window.innerWidth;
+    const containerHeight = window.innerHeight;
 
     // Determine target squares per row based on container size
     if (containerWidth < 768) {
@@ -76,11 +73,10 @@ const SquaredLayout: React.FC<SquaredLayoutProps> = ({
       calculateSquares();
     };
 
-    const container = containerRef.current;
-    container?.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      container?.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -106,18 +102,6 @@ const SquaredLayout: React.FC<SquaredLayoutProps> = ({
   }, [numSquares]);
 
   return (
-    <div className="relative w-full h-full" ref={containerRef}>
-      {/* Net Layer */}
-      <div
-        className="absolute flex items-center justify-center w-full h-full pointer-events-none"
-        style={{
-          zIndex: 0,
-        }}
-      >
-        <Net rows={gridSize.rows} cols={gridSize.cols} squareSize={squareSize} containerHeight={containerRef.current?.offsetHeight || 0} />
-      </div>
-
-      {/* Squares Layer */}
       <div className="flex flex-wrap items-center justify-center w-full h-full relative">
         {squareStates.map((state, index) => (
           <Square
@@ -130,7 +114,6 @@ const SquaredLayout: React.FC<SquaredLayoutProps> = ({
           />
         ))}
       </div>
-    </div>
   );
 };
 
@@ -146,74 +129,16 @@ const Square: React.FC<SquareProps> = ({ size, color, isPainted }) => {
         width: size,
         height: size,
         backgroundColor: color,
-        transition: `background-color ${transitionStyle}, box-shadow ${transitionStyle}, z-index ${transitionStyle}`,
+        transition: `background-color ${transitionStyle}, box-shadow ${transitionStyle}, z-index ${transitionStyle}, border ${transitionStyle}`,
         boxShadow: isPainted
           ? `0 0 ${shadowSize1}px ${color}, 0 0 ${shadowSize2}px ${color}, 0 0 ${shadowSize3}px ${color}`
           : "none",
         zIndex: isPainted ? 1 : 0,
+        border: isPainted? "transparent" : "1px solid #000"
       }}
       className={`flex-shrink-0`}
     ></div>
   );
-};
-
-// Net Component
-const Net: React.FC<{ rows: number; cols: number; squareSize: number; containerHeight: number }> = ({ rows, cols, squareSize, containerHeight }) => {
-  const [screenSize, setScreenSize] = useState<{ width: number, height: number }>({ width: 0, height: 0 });
-
-  const lineStyle = {
-    backgroundColor: "#333", // Net line color
-    position: "absolute" as const,
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize(); // Trigger resize on mount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const netWidth = cols * squareSize;
-  const netHeight = containerHeight; // Ensure the net fills the container's height
-
-  // Avoid sub-pixel calculations and use floor to make sure the grid always fits
-  const offsetX = Math.floor((screenSize.width - netWidth) / 2);
-  const offsetY = Math.floor((screenSize.height - netHeight) / 2);
-
-  // Create horizontal net lines
-  const horizontalLines = Array.from({ length: rows + 1 }).map((_, i) => (
-    <div
-      key={`h-${i}`}
-      style={{
-        ...lineStyle,
-        top: `${offsetY + i * squareSize}px`,
-        left: `${offsetX}px`,
-        width: `${netWidth}px`,
-        height: "1px",
-      }}
-    ></div>
-  ));
-
-  // Create vertical net lines
-  const verticalLines = Array.from({ length: cols + 1 }).map((_, i) => (
-    <div
-      key={`v-${i}`}
-      style={{
-        ...lineStyle,
-        left: `${offsetX + i * squareSize}px`,
-        top: `${offsetY}px`,
-        height: `${netHeight}px`,
-        width: "1px",
-      }}
-    ></div>
-  ));
-
-  return <>{[...horizontalLines, ...verticalLines]}</>;
 };
 
 // Random color generator for squares

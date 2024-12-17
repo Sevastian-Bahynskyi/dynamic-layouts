@@ -5,7 +5,8 @@ export interface SquaredLayoutProps {
     changeToDefaultColorInterval: {
       from: number;
       to: number;
-    }
+    },
+    changeTransition: string;
   };
   gap: {
     size: number;

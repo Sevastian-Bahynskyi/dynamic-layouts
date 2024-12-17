@@ -20,6 +20,7 @@ const SquaredLayout: React.FC<SquaredLayoutProps> = ({
             isPainted={state.isPainted}
             color={state.color}
             squaresPerRow={gridSize.cols}
+            changeTransition={square.changeTransition}
           />
         ))}
       </div>
@@ -32,13 +33,13 @@ interface SquareProps {
   index: number;
   squaresPerRow: number;
   color: string;
+  changeTransition: string;
 }
 
-const Square: React.FC<SquareProps> = ({ size, color, isPainted }) => {
+const Square: React.FC<SquareProps> = ({ size, color, isPainted, changeTransition}) => {
   const shadowSize1 = size * 0.1;
   const shadowSize2 = size * 0.2;
   const shadowSize3 = size * 0.4;
-  const transitionStyle = "1.5s ease";
 
   return (
     <div
@@ -46,11 +47,10 @@ const Square: React.FC<SquareProps> = ({ size, color, isPainted }) => {
         width: size,
         height: size,
         backgroundColor: color,
-        transition: `background-color ${transitionStyle}, box-shadow ${transitionStyle}, z-index ${transitionStyle}`,
+        transition: `background-color ${changeTransition}, box-shadow ${changeTransition}`,
         boxShadow: isPainted
           ? `0 0 ${shadowSize1}px ${color}, 0 0 ${shadowSize2}px ${color}, 0 0 ${shadowSize3}px ${color}`
-          : "none",
-        zIndex: isPainted ? 1 : 0,
+          : "none"
       }}
       className={`flex-shrink-0`}
     ></div>

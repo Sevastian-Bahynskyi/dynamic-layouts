@@ -10,9 +10,10 @@ const HomePage: React.FC = () => {
     square: {
       defaultColor: '#0f172a',
       changeToDefaultColorInterval: {
-        from: 2500,
-        to: 3000
-      }
+        from: 1500,
+        to: 4000
+      },
+      changeTransition: '2s ease'
     },
     gap: {
       size: 2,

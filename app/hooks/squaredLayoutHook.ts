@@ -21,10 +21,10 @@ export function useSquaredLayout(props: SquaredLayoutProps) {
       targetSquaresPerRow = 36;
     }
 
-    const squareSize = Math.floor(containerWidth / targetSquaresPerRow) - props.gap.size;
+    const squareSize = Math.floor(containerWidth / targetSquaresPerRow) - props.net.width;
 
-    const cols = Math.floor(containerWidth / (squareSize + props.gap.size));
-    const rows = Math.floor(containerHeight / (squareSize + props.gap.size));
+    const cols = Math.floor(containerWidth / (squareSize + props.net.width));
+    const rows = Math.floor(containerHeight / (squareSize + props.net.width));
 
     const totalSquares = cols * rows;
 

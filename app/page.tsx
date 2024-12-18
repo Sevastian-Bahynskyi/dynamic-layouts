@@ -15,8 +15,8 @@ const HomePage: React.FC = () => {
       },
       changeTransition: '2s ease'
     },
-    gap: {
-      size: 2,
+    net: {
+      width: 2,
       color: '#2e2e2e'
     }
   };

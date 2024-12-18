@@ -8,8 +8,8 @@ export interface SquaredLayoutProps {
     },
     changeTransition: string;
   };
-  gap: {
-    size: number;
+  net: {
+    width: number;
     color: string;
   };
 }

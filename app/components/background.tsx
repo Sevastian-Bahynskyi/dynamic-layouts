@@ -6,12 +6,12 @@ import { SquaredLayoutProps } from "../props/squaredLayoutProps";
 const SquaredLayout: React.FC<SquaredLayoutProps> = ({
   paintedSquareRatio,
   square,
-  gap
+  net
 }) => {
-  const { squareSize, squareStates, gridSize } = useSquaredLayout({paintedSquareRatio, square, gap});
+  const { squareSize, squareStates, gridSize } = useSquaredLayout({paintedSquareRatio, square, net});
 
   return (
-      <div className="flex flex-wrap items-center justify-center w-fit h-full relative" style={{ gap: `${gap.size}px`, backgroundColor: gap.color }}>
+      <div className="flex flex-wrap items-center justify-center w-fit h-full relative" style={{ gap: `${net.width}px`, backgroundColor: net.color }}>
         {squareStates.map((state, index) => (
           <Square
             key={index}
@@ -47,10 +47,11 @@ const Square: React.FC<SquareProps> = ({ size, color, isPainted, changeTransitio
         width: size,
         height: size,
         backgroundColor: color,
-        transition: `background-color ${changeTransition}, box-shadow ${changeTransition}`,
+        transition: `background-color ${changeTransition}, box-shadow ${changeTransition}, z-index ${changeTransition}`,
         boxShadow: isPainted
           ? `0 0 ${shadowSize1}px ${color}, 0 0 ${shadowSize2}px ${color}, 0 0 ${shadowSize3}px ${color}`
-          : "none"
+          : "none",
+          zIndex: isPainted ? 1 : 0
       }}
       className={`flex-shrink-0`}
     ></div>

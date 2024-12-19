@@ -1,12 +1,23 @@
 {
   "name": "squared-layout",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sevastian-Bahynskyi/squared-layout.git"
+  },
+  "author": "Sevastian Bahynskyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sevastian-Bahynskyi/squared-layout/issues"
+  },
+  "homepage": "https://github.com/Sevastian-Bahynskyi/squared-layout#readme",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "semantic-release"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
@@ -16,12 +27,17 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
     "postcss": "^8.4.49",
+    "semantic-release": "^24.2.0",
     "tailwindcss": "^3.4.16",
     "typescript": "^5"
   }

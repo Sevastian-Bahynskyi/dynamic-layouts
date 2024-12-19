@@ -1,7 +1,7 @@
 // app/page.tsx
 
 import React from 'react';
-import SquaredLayout from './components/background';
+import SquaredLayout from './_components/background';
 import { SquaredLayoutProps } from './props/squaredLayoutProps';
 
 const HomePage: React.FC = () => {

@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
     net: {
       width: 2,
       color: '#2e2e2e'
-    }
+    },
   };
 
   return (

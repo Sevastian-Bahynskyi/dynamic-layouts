@@ -37,7 +37,7 @@ export function useSquaredLayout(props: SquaredLayoutProps) {
   const initializeSquareStates = (total: number) => {
     const states = Array.from({ length: total }, () => {
       const shouldPaint = shouldPaintSquare(props.paintedSquareRatio);
-      const initialColor = shouldPaint ? generateSquareColor() : props.square.defaultColor;
+      const initialColor = shouldPaint ? generateSquareColor(props.colorScheme!) : props.square.defaultColor;
 
       const squareState = {
         isPainted: shouldPaint,
@@ -71,7 +71,7 @@ export function useSquaredLayout(props: SquaredLayoutProps) {
           const shouldPaint = shouldPaintSquare(props.paintedSquareRatio);
           newStates[index] = {
             isPainted: shouldPaint,
-            color: shouldPaint ? generateSquareColor() : props.square.defaultColor,
+            color: shouldPaint ? generateSquareColor(props.colorScheme!) : props.square.defaultColor,
           };
           return newStates;
         });
@@ -109,21 +109,6 @@ function randomTimeout(timeInterval: { from: number; to: number }) {
     return Math.random() * timeInterval.to + timeInterval.from;
 }
 
-function generateSquareColor() {
-    const neonColors: string[] = [
-      "#39FF14", // Neon Green
-      "#7DF9FF", // Electric Blue
-      "#FF6EC7", // Neon Pink
-      "#FFEA00", // Bright Yellow
-      "#FF6700", // Neon Orange
-      "#BC13FE", // Neon Purple
-      "#FF073A", // Cyber Red
-      "#00FFFF", // Aqua Cyan
-      "#D0FF14", // Lime Yellow
-      "#E9E0FF", // Neon Lavender
-      "#FF9A8B", // Fluorescent Peach
-      "#01F9C6", // Bright Teal
-    ];
-  
-    return neonColors[Math.floor(Math.random() * neonColors.length)];
+function generateSquareColor(colorScheme: string[]) {
+    return colorScheme[Math.floor(Math.random() * colorScheme.length)];
 }

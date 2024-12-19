@@ -2,13 +2,15 @@
 
 import { useSquaredLayout } from "../hooks/squaredLayoutHook";
 import { SquaredLayoutProps } from "../props/squaredLayoutProps";
+import { defaultColorScheme } from "../utils/defaultColorScheme";
 
 const SquaredLayout: React.FC<SquaredLayoutProps> = ({
   paintedSquareRatio,
   square,
-  net
+  net,
+  colorScheme = defaultColorScheme
 }) => {
-  const { squareSize, squareStates, gridSize } = useSquaredLayout({paintedSquareRatio, square, net});
+  const { squareSize, squareStates, gridSize } = useSquaredLayout({paintedSquareRatio, square, net, colorScheme});
 
   return (
       <div className="flex flex-wrap items-center justify-center w-fit h-full relative" style={{ gap: `${net.width}px`, backgroundColor: net.color }}>

@@ -12,5 +12,6 @@ export interface SquaredLayoutProps {
     width: number;
     color: string;
   };
+  colorScheme?: string[];
 }
 

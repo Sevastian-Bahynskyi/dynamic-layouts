@@ -1,5 +1,8 @@
 {
-  "name": "squared-layout",
+  "name": "@Sevastian-Bahynskyi/squared-layout",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "version": "0.0.1",
   "private": true,
   "repository": {

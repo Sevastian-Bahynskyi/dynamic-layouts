@@ -4,7 +4,6 @@
     "registry": "https://npm.pkg.github.com"
   },
   "version": "0.0.1",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/Sevastian-Bahynskyi/squared-layout"

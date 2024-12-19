@@ -1,4 +1,4 @@
-name: Release package
+name: Release and publish package
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Release package
+      - name: Release and publish package
         run: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

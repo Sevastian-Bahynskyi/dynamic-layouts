@@ -17,7 +17,8 @@
   "homepage": "https://github.com/Sevastian-Bahynskyi/squared-layout#readme",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "tsc && rollup -c",
+    "build": "next build",
+    "pack": "tsc && rollup -c",
     "start": "next start",
     "lint": "next lint",
     "release": "semantic-release"

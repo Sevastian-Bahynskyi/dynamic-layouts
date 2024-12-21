@@ -1,5 +1,6 @@
 {
   "name": "@Sevastian-Bahynskyi/squared-layout",
+  "type": "module",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -16,7 +17,7 @@
   "homepage": "https://github.com/Sevastian-Bahynskyi/squared-layout#readme",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "tsc && rollup -c",
     "start": "next start",
     "lint": "next lint",
     "release": "semantic-release"
@@ -29,6 +30,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/github": "^11.0.1",
@@ -39,6 +42,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
     "postcss": "^8.4.49",
+    "rollup-plugin-typescript2": "^0.36.0",
     "semantic-release": "^24.2.0",
     "tailwindcss": "^3.4.16",
     "typescript": "^5"

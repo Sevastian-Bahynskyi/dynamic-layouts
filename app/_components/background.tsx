@@ -60,7 +60,4 @@ const Square: React.FC<SquareProps> = ({ size, color, isPainted, changeTransitio
   );
 };
 
-// Random color generator for squares
-
-
-export default SquaredLayout;
+export { SquaredLayout }; 

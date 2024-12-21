@@ -18,6 +18,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Build package
+        run: npm run build
+
       - name: Release and publish package
         run: npm run release
         env:

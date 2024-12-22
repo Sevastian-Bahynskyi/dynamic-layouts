@@ -1,13 +1,13 @@
 // vite.config.ts
 import { defineConfig } from 'vite';
-// import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import { peerDependencies } from './package.json';
 
 const isLibrary = process.env.BUILD_LIB === 'true';
 
 export default defineConfig({
-  plugins: [dts()],
+  plugins: [react(), dts()],
   base: isLibrary ? undefined : '/squared-layout/',
   build: isLibrary
     ? {

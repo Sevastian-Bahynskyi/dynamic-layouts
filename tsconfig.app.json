@@ -13,9 +13,9 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "declaration": true,
-    "emitDeclarationOnly": true, // Emit only declaration files
+    "emitDeclarationOnly": true,
     "jsx": "react-jsx",
-    "typeRoots": ["./dist/index.d.ts"],
+    "typeRoots": ["./dist/lib/index.d.ts"],
 
     /* Linting */
     "strict": true,

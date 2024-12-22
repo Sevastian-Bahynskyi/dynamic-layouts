@@ -1,5 +1,11 @@
 # Squared Layout
 
+## Technical Details
+
+- **Framework**: React with TypeScript
+- **Build Tool**: Vite
+- **Release Management**: Semantic Release
+
 ## Highlights
 
 - **Responsive Design**: Adapts seamlessly to different screen sizes.
@@ -8,4 +14,5 @@
 - **Performance Optimized**: Efficient and fast loading times.
 
 ## Result - Single Frame
+
 ![Single frame](public/image.png)

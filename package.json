@@ -1,6 +1,18 @@
 {
-  "name": "@Sevastian-Bahynskyi/squared-layout",
+  "name": "@sevastian-bahynskyi/squared-layout",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "release": "semantic-release"
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -14,37 +26,28 @@
     "url": "https://github.com/Sevastian-Bahynskyi/squared-layout/issues"
   },
   "homepage": "https://github.com/Sevastian-Bahynskyi/squared-layout#readme",
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "pack": "tsc && rollup -c",
-    "start": "next start",
-    "lint": "next lint",
-    "release": "semantic-release"
-  },
   "dependencies": {
-    "autoprefixer": "^10.4.20",
-    "next": "15.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@rollup/plugin-commonjs": "^28.0.2",
-    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@eslint/js": "^9.17.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/github": "^11.0.1",
     "@semantic-release/release-notes-generator": "^14.0.2",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.0",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.13.0",
     "postcss": "^8.4.49",
-    "rollup-plugin-typescript2": "^0.36.0",
-    "semantic-release": "^24.2.0",
-    "tailwindcss": "^3.4.16",
-    "typescript": "^5"
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.1",
+    "vite": "^6.0.3"
   }
 }

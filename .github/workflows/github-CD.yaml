@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: Package source code
-        run: npm run pack
+        run: npm run build
 
       - name: Release and publish package
         run: npm run release

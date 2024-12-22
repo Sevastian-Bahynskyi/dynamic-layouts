@@ -31,10 +31,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifact
-          path: dist
+          path: ./dist
 
   deploy:
     needs: build-and-publish
@@ -45,13 +45,15 @@ jobs:
     environment:
       name: gh-pages
       url: ${{ steps.deploy.outputs.url }}
-
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build-artifact
+
+      - name: Extract artifact
+        run: tar -xvf build-artifact.tar.gz
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

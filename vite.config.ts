@@ -1,30 +1,25 @@
 // vite.config.ts
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+// import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
-import path from 'path';
+import { peerDependencies } from './package.json';
 
 const isLibrary = process.env.BUILD_LIB === 'true';
 
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [dts()],
   base: isLibrary ? undefined : '/squared-layout/',
   build: isLibrary
     ? {
-        outDir: './dist/lib',
+      outDir: './dist/lib',
         lib: {
-          entry: path.resolve(__dirname, 'index.ts'),
+          entry: "./index.ts",
           name: 'SquaredLayout',
-          fileName: (format) => `index.${format}.js`
+          fileName: (format) => `index.${format}.js`,
+          formats: ["cjs", "es"]
         },
         rollupOptions: {
-          external: ['react', 'react-dom'],
-          output: {
-            globals: {
-              react: 'React',
-              'react-dom': 'ReactDOM',
-            },
-          },
+          external: [...Object.keys(peerDependencies)]
         },
         sourcemap: true,
         emptyOutDir: true,

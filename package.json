@@ -1,14 +1,15 @@
 {
   "name": "@sevastian-bahynskyi/squared-layout",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "files": [
-    "dist"
+    "dist/lib"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build:lib": "tsc -b && BUILD_LIB=true vite build",
+    "build:app": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "release": "semantic-release"
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/Sevastian-Bahynskyi/squared-layout#readme",
   "dependencies": {
+    "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -36,6 +38,7 @@
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/github": "^11.0.1",
     "@semantic-release/release-notes-generator": "^14.0.2",
+    "@types/node": "^22.10.2",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",

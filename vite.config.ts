@@ -15,6 +15,7 @@ export default defineConfig({
           entry: path.resolve(__dirname, 'src/index.ts'),
           name: 'SquaredLayout',
           fileName: (format) => `squared-layout.${format}.js`,
+          formats: ['es', 'cjs'],
         },
         rollupOptions: {
           external: ['react', 'react-dom'],

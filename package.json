@@ -1,15 +1,21 @@
 {
   "name": "@sevastian-bahynskyi/squared-layout",
   "type": "module",
-  "main": "dist/lib/squared-layout.cjs.js",
-  "module": "dist/lib/squared-layout.es.js",
+  "main": "dist/lib/index.umg.js",
+  "module": "dist/lib/index.es.js",
   "types": "dist/lib/index.d.ts",
   "files": [
     "dist/lib"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/lib/index.es.js",
+      "require": "./dist/lib/index.umg.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build:lib": "tsc -b && BUILD_LIB=true vite build",
+    "build:lib": "tsc && BUILD_LIB=true vite build",
     "build:app": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -31,7 +37,8 @@
   "dependencies": {
     "path": "^0.12.7",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "vite-plugin-dts": "^4.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

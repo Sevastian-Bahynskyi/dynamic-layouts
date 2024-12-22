@@ -1,21 +1,21 @@
 // vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
 import path from 'path';
 
 const isLibrary = process.env.BUILD_LIB === 'true';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), dts()],
   base: isLibrary ? undefined : '/squared-layout/',
   build: isLibrary
     ? {
         outDir: './dist/lib',
         lib: {
-          entry: path.resolve(__dirname, 'src/index.ts'),
+          entry: path.resolve(__dirname, 'index.ts'),
           name: 'SquaredLayout',
-          fileName: (format) => `squared-layout.${format}.js`,
-          formats: ['es', 'cjs'],
+          fileName: (format) => `index.${format}.js`
         },
         rollupOptions: {
           external: ['react', 'react-dom'],
@@ -26,6 +26,8 @@ export default defineConfig({
             },
           },
         },
+        sourcemap: true,
+        emptyOutDir: true,
       }
     : {
         outDir: './dist/app',   

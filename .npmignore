@@ -1,0 +1,13 @@
+# Exclude all files except the dist folder
+*
+!dist
+
+# Exclude specific files and directories
+node_modules
+src
+public
+tests
+.vscode
+.git
+.gitignore
+README.md

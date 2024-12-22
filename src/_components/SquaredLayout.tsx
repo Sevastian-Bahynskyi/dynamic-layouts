@@ -1,5 +1,3 @@
-"use client";
-
 import { useSquaredLayout } from "../_hooks/squaredLayoutHook";
 import { SquaredLayoutProps } from "../props/squaredLayoutProps";
 import { defaultColorScheme } from "../_utils/defaultColorScheme";

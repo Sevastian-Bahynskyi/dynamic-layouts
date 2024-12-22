@@ -9,8 +9,9 @@ on:
       - main
 
 jobs:
-  build-and-publish:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -30,44 +31,6 @@ jobs:
         run: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifact
-          path: ./dist
-
-  deploy:
-    needs: build-and-publish
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: gh-pages
-      url: ${{ steps.deploy.outputs.url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20.x"
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifact
-
-      - name: Extract build artifact
-        run: |
-          mkdir -p ./dist
-          unzip -o build-artifact.zip -d ./dist
-
-      - name: List ./dist directory
-        run: ls -R ./dist
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

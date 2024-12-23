@@ -5,16 +5,20 @@ import dts from 'vite-plugin-dts';
 import { peerDependencies } from './package.json';
 import { resolve } from 'path';
 import tailwindcss from "tailwindcss";
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 const isLibrary = process.env.BUILD_LIB === 'true';
 
 export default defineConfig({
-  plugins: [react(), dts({
-    tsconfigPath: './tsconfig.app.json',
-    outDir: './dist/lib',
-    insertTypesEntry: true,
-    copyDtsFiles: true,
-  })],
+  plugins: [react(), 
+    dts({
+      tsconfigPath: './tsconfig.app.json',
+      outDir: './dist/lib',
+      insertTypesEntry: true,
+      copyDtsFiles: true,
+    }),
+    libInjectCss()
+],
   css: {
     postcss: {
       plugins: [tailwindcss()],
@@ -38,7 +42,9 @@ export default defineConfig({
               react: "React",
               "react-dom": "ReactDOM",
               tailwindcss: "tailwindcss",
+              assetFileNames: './index.css'
             },
+            preserveModules: false
           },
         },
         sourcemap: true,

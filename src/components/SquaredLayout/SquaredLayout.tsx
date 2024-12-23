@@ -1,5 +1,5 @@
 import { useSquaredLayout } from "./squaredLayoutHook";
-import "./styles.css"
+import "../../../index.css";
 import { SquaredLayoutProps } from "../../props/squaredLayoutProps";
 import { defaultColorScheme } from "../../utils/defaultColorScheme";
 

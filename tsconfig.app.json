@@ -30,5 +30,5 @@
     
     // "outDir": "./dist/lib",
   },
-  "include": ["src", "index.ts"]
+  "include": ["src", "./index.ts"]
 }

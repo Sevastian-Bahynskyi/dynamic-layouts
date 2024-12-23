@@ -3,12 +3,12 @@
   "type": "module",
   "main": "dist/lib/index.cjs.js",
   "module": "dist/lib/index.es.js",
-  "types": "dist/lib/index.d.ts",
   "files": [
     "/dist/lib"
   ],
   "exports": {
     ".": {
+      "types": "./dist/lib/index.d.ts",
       "import": "./dist/lib/index.es.js",
       "require": "./dist/lib/index.cjs.js"
     }

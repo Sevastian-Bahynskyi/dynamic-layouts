@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import { peerDependencies } from './package.json';
+import { resolve } from 'path';
 
 const isLibrary = process.env.BUILD_LIB === 'true';
 
@@ -13,7 +14,7 @@ export default defineConfig({
     ? {
       outDir: './dist/lib',
         lib: {
-          entry: "./index.ts",
+          entry: resolve(__dirname, './index.ts'),
           name: 'SquaredLayout',  
           fileName: (format) => `index.${format}.js`,
           formats: ["cjs", "es"]

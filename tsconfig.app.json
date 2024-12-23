@@ -27,7 +27,7 @@
     "sourceMap": true,
     "sourceRoot": "./src",
     
-    // "outDir": "./dist/lib"
+    "outDir": "./dist/lib",
   },
-  "include": ["src"]
+  "include": ["src/**/*", "index.ts"]
 }

@@ -1,5 +1,3 @@
-// app/page.tsx
-
 import React from 'react';
 import { SquaredLayoutProps } from './props/squaredLayoutProps';
 import { SquaredLayout } from './components/SquaredLayout';

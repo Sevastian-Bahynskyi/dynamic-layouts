@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from "react";
-import { SquaredLayoutProps } from "../props/squaredLayoutProps";
+import { SquaredLayoutProps } from "../../props/squaredLayoutProps";
 
 export function useSquaredLayout(props: SquaredLayoutProps) {
   const [numSquares, setNumSquares] = useState(0);

@@ -1,1 +1,0 @@
-export { SquaredLayout } from "./SquaredLayout";

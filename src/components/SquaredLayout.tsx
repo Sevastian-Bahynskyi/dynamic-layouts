@@ -58,4 +58,5 @@ const Square: React.FC<SquareProps> = ({ size, color, isPainted, changeTransitio
   );
 };
 
-export default SquaredLayout; 
+export { SquaredLayout };
+export type { SquaredLayoutProps };

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { SquaredLayoutProps } from './props/squaredLayoutProps';
-import { SquaredLayout } from './components';
+import { SquaredLayout } from './components/SquaredLayout';
 
 const HomePage: React.FC = () => {
   const squaredLayoutProps: SquaredLayoutProps = {

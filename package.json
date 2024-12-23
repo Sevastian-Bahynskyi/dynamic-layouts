@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build:lib": "tsc -b && BUILD_LIB=true vite build",
+    "build:lib": "tsc --build tsconfig.app.json && BUILD_LIB=true vite build",
     "build:app": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

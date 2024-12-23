@@ -7,12 +7,7 @@ import { peerDependencies } from './package.json';
 const isLibrary = process.env.BUILD_LIB === 'true';
 
 export default defineConfig({
-  plugins: [react(), dts({
-    tsconfigPath: './tsconfig.app.json',
-    outDir: './dist/lib',
-    insertTypesEntry: true,
-    copyDtsFiles: true,
-  })],
+  plugins: [react(), dts()],
   base: isLibrary ? undefined : '/squared-layout/',
   build: isLibrary
     ? {

@@ -10,10 +10,11 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    // "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true, 
+    "emitDeclarationOnly": true,
+    // "noEmit": true, 
     "declaration": true,
     "jsx": "react-jsx",
     "typeRoots": ["./dist/lib/index.d.ts"],
@@ -29,5 +30,5 @@
     
     // "outDir": "./dist/lib"
   },
-  "include": ["src"]
+  "include": ["src", "./index.ts"]
 }

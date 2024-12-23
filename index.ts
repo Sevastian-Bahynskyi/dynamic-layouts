@@ -1,2 +1,2 @@
-export { SquaredLayout } from "./src/components/SquaredLayout";
-export type { SquaredLayoutProps } from "./src/props/squaredLayoutProps";
+export * from './src/components';
+export * from './src/props';

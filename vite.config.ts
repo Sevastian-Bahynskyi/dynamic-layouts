@@ -30,8 +30,16 @@ export default defineConfig({
           fileName: (format) => `index.${format}.js`,
           formats: ["cjs", "es"]
         },
+        cssCodeSplit: true,
         rollupOptions: {
-          external: [...Object.keys(peerDependencies)]
+          external: [...Object.keys(peerDependencies)],
+          output: {
+            globals: {
+              react: "React",
+              "react-dom": "ReactDOM",
+              tailwindcss: "tailwindcss",
+            },
+          },
         },
         sourcemap: true,
         emptyOutDir: true,

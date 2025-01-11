@@ -27,8 +27,6 @@
     "noUncheckedSideEffectImports": true,
     "sourceMap": true,
     "sourceRoot": "./src",
-    
-    // "outDir": "./dist/lib",
   },
   "include": ["src", "index.ts"],
   "exclude": ["src/main.tsx", "src/App.tsx"]

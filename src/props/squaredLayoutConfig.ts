@@ -1,4 +1,4 @@
-export interface SquaredLayoutProps {
+export interface SquaredLayoutConfig {
   paintedSquareRatio: number;
   square: {
     defaultColor: string;

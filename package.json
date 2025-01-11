@@ -1,5 +1,5 @@
 {
-  "name": "@sevastian-bahynskyi/squared-layout",
+  "name": "@sevastian-bahynskyi/dynamic-layouts",
   "type": "module",
   "main": "dist/lib/index.cjs.js",
   "module": "dist/lib/index.es.js",
@@ -26,15 +26,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Sevastian-Bahynskyi/squared-layout"
+    "url": "https://github.com/Sevastian-Bahynskyi/dynamic-layouts"
   },
   "author": "Sevastian Bahynskyi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sevastian-Bahynskyi/squared-layout/issues"
+    "url": "https://github.com/Sevastian-Bahynskyi/dynamic-layouts/issues"
   },
-  "homepage": "https://github.com/Sevastian-Bahynskyi/squared-layout#readme",
+  "homepage": "https://github.com/Sevastian-Bahynskyi/dynamic-layouts#readme",
   "dependencies": {
+    "d3": "^7.9.0",
     "path": "^0.12.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -50,6 +51,7 @@
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/github": "^11.0.1",
     "@semantic-release/release-notes-generator": "^14.0.2",
+    "@types/d3": "^7.4.3",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",

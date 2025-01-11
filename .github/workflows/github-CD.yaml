@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-lib-and-release:
@@ -38,7 +39,7 @@ jobs:
       - name: Release and publish package
         run: npm run release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   build-app-and-deploy:
     runs-on: ubuntu-latest

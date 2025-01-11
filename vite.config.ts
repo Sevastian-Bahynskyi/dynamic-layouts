@@ -24,7 +24,7 @@ export default defineConfig({
       plugins: [tailwindcss()],
     },
   },
-  base: isLibrary ? undefined : '/squared-layout/',
+  base: isLibrary ? undefined : '/dynamic-layouts/',
   build: isLibrary
     ? {
       outDir: './dist/lib',

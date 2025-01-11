@@ -1,4 +1,4 @@
-# Squared Layout
+# Dynamic Layouts
 
 ## Technical Details
 

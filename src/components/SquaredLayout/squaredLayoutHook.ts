@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
-import { SquaredLayoutProps } from "../../props/squaredLayoutProps";
+import { SquaredLayoutConfig } from "../../props/squaredLayoutConfig";
 
-export function useSquaredLayout(props: SquaredLayoutProps) {
+export function useSquaredLayout(props: SquaredLayoutConfig) {
   const [numSquares, setNumSquares] = useState(0);
   const [squareSize, setSquareSize] = useState(0);
   const [squareStates, setSquareStates] = useState<{ isPainted: boolean; color: string }[]>([]);

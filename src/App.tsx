@@ -1,9 +1,9 @@
 import React from 'react';
-import { SquaredLayoutProps } from './props/squaredLayoutProps';
+import { SquaredLayoutConfig } from './props/squaredLayoutConfig';
 import { SquaredLayout } from './components/SquaredLayout/SquaredLayout';
 
 const HomePage: React.FC = () => {
-  const squaredLayoutProps: SquaredLayoutProps = {
+  const squaredLayoutProps: SquaredLayoutConfig = {
     paintedSquareRatio: 7,
     square: {
       defaultColor: '#0f172a',

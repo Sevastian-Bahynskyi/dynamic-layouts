@@ -1,11 +1,10 @@
+import { FromTo } from "./base";
+
 export interface SquaredLayoutConfig {
   paintedSquareRatio: number;
   square: {
     defaultColor: string;
-    changeToDefaultColorInterval: {
-      from: number;
-      to: number;
-    },
+    changeToDefaultColorInterval: FromTo;
     changeTransition: string;
   };
   net: {

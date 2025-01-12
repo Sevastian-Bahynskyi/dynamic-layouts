@@ -1,5 +1,6 @@
 import { useState, useLayoutEffect } from "react";
-import { SquaredLayoutConfig } from "../../props/squaredLayoutConfig";
+import { SquaredLayoutConfig } from "../../types/squaredLayout";
+import { randomString } from "../../utils/random";
 
 export function useSquaredLayout(props: SquaredLayoutConfig) {
   const [numSquares, setNumSquares] = useState(0);
@@ -102,13 +103,13 @@ export function useSquaredLayout(props: SquaredLayoutConfig) {
 }
 
 function shouldPaintSquare(paintedSquareRatio: number) {
-    return Math.random() < paintedSquareRatio / 100;
+  return Math.random() < paintedSquareRatio / 100;
 }
 
 function randomTimeout(timeInterval: { from: number; to: number }) {
-    return Math.random() * timeInterval.to + timeInterval.from;
+  return Math.random() * timeInterval.to + timeInterval.from;
 }
 
 function generateSquareColor(colorScheme: string[]) {
-    return colorScheme[Math.floor(Math.random() * colorScheme.length)];
+  return randomString(colorScheme);
 }

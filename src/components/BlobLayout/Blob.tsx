@@ -1,17 +1,14 @@
-import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
+import { useRef, useEffect } from "react";
+import { Point, Size } from "../../types/base";
 
 interface BlobConfig {
   id: number;
   color: string;
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
+  size: Size;
+  position: Point;
+  velocity: Point;
   rotation: number;
-  rotationSpeed: number;
   morphSpeed: number;
   morphIntensity: number;
   numPoints: number;
@@ -36,7 +33,7 @@ const Blob: React.FC<BlobConfig> = (props) => {
     const generatePoints = (time: number) => {
       const points = [];
       const angleStep = (Math.PI * 2) / props.numPoints;
-      const baseRadius = Math.min(props.width, props.height) / 2;
+      const baseRadius = Math.min(props.size.width, props.size.height) / 2;
 
       for (let i = 0; i < props.numPoints; i++) {
         const angle = i * angleStep + props.rotation;
@@ -62,8 +59,8 @@ const Blob: React.FC<BlobConfig> = (props) => {
 
         const radius = baseRadius * (1 + noiseValue * props.morphIntensity);
         points.push([
-          props.x + radius * Math.cos(angle),
-          props.y + radius * Math.sin(angle)
+          props.position.x + radius * Math.cos(angle),
+          props.position.y + radius * Math.sin(angle)
         ] as [number, number]);
       }
       return points;
@@ -92,5 +89,5 @@ const Blob: React.FC<BlobConfig> = (props) => {
   );
 };
 
-export default Blob;
+export  default Blob;
 export type { BlobConfig };

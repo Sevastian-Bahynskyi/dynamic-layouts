@@ -1,123 +1,127 @@
 import { FC, useEffect, useState } from "react";
 import Blob, { BlobConfig } from "./Blob";
 import { defaultColorScheme } from "../../utils/defaultColorScheme";
-import { BlobLayoutConfig } from "../../..";
+import { randomNum, randomString } from "../../utils/random";
+import { BlobLayoutConfig } from "../../types/blobLayout";
+import { FromTo, Size } from "../../types/base";
 
-const createBlob = (id: number, width: number, height: number, colorScheme: string[]): BlobConfig => {
-  const size = 80 + Math.random() * 80;
+const ANIMATION_FRAME_RATE = 16;
+const usedColors = new Set<string>();
+const VELOCITY_DRIFT = 2;
+
+const createBlob = (
+  id: number,
+  colorScheme: string[],
+  sizeRange: FromTo,
+  speedRange: FromTo,
+  container: Size,
+  rotationSpeedRange: FromTo,
+  morphing: { speed: FromTo; intensity: FromTo }
+): BlobConfig => {
+  const size = randomNum(sizeRange.from, sizeRange.to);
+  const direction = Math.random() > 0.5 ? 1 : -1;
+  const possibleColors = colorScheme.filter((color) => !usedColors.has(color));
+  const color = randomString(possibleColors);
+
+  // Add the selected color to the usedColors set
+  usedColors.add(color);
+
+  // Ensure initial position is fully within bounds accounting for blob size
+  const margin = size / 2;
   return {
     id,
-    color: colorScheme[Math.floor(Math.random() * defaultColorScheme.length)],
-    width: size,
-    height: size,
-    x: Math.random() * (width - size * 2) + size,
-    y: Math.random() * (height - size * 2) + size,
-    vx: (Math.random() * 3 + 1) * (Math.random() > 0.5 ? 1 : -1), // Randomized speed and direction
-    vy: (Math.random() * 2 + 1) * (Math.random() > 0.5 ? 1 : -1),
-    rotation: Math.random() * Math.PI * 2,
-    rotationSpeed: (Math.random() - 0.3) * 0.02,
-    morphSpeed: 1.3 + Math.random() * 4,
-    morphIntensity: 0.2 + Math.random() * 1.3,
+    color: color,
+    size: { width: size, height: size },
+    position: {
+      x: randomNum(margin, container.width - margin),
+      y: randomNum(margin, container.height - margin),
+    },
+    velocity: {
+      x: randomNum(speedRange.from, speedRange.to) * direction,
+      y: randomNum(speedRange.from, speedRange.to) * direction * 0.67,
+    },
+    rotation: randomNum(rotationSpeedRange.from, rotationSpeedRange.to) * Math.PI * 2,
+    morphSpeed: randomNum(morphing.speed.from, morphing.speed.to),
+    morphIntensity: randomNum(morphing.intensity.from, morphing.intensity.to),
     numPoints: Math.floor(4 + Math.random() * 6),
     seed: Math.random() * 300000,
   };
 };
 
 const BlobLayout: FC<BlobLayoutConfig> = ({
-  numBlobs = 14,
+  numBlobs = 9,
   colorScheme = defaultColorScheme,
-  opacity = 0.8,
+  opacity = 1,
+  size = { from: 200, to: 300 },
+  speed = { from: 2, to: 6 },
+  rotationSpeed = { from: -0.3, to: 2 },
+  container,
+  morphing = { 
+    speed: { from: 4, to: 12 }, 
+    intensity: { from: 0.2, to: 0.8 }
+  },
 }: BlobLayoutConfig) => {
-  const [isClient, setIsClient] = useState(false);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [blobs, setBlobs] = useState<BlobConfig[]>([]);
 
   useEffect(() => {
-    // Check if we're running on the client
-    if (typeof window !== "undefined") {
-      setIsClient(true);
-      setDimensions({ width: window.innerWidth, height: window.innerHeight });
-
-      const updateDimensions = () => {
-        setDimensions({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      };
-
-      window.addEventListener("resize", updateDimensions);
-
-      return () => window.removeEventListener("resize", updateDimensions);
-    }
+    const initialBlobs = Array.from({ length: numBlobs }, (_, i) =>
+      createBlob(i, colorScheme, size, speed, container, rotationSpeed, morphing)
+    );
+    setBlobs(initialBlobs);
   }, []);
 
   useEffect(() => {
-    if (isClient) {
-      const initialBlobs = Array.from({ length: numBlobs }, (_, i) =>
-        createBlob(i, dimensions.width, dimensions.height, colorScheme)
+    const updateBlobPositions = () => {
+      setBlobs((prevBlobs) =>
+        prevBlobs.map((blob) => {
+          // Add small random drift to create organic movement
+          let newVx = blob.velocity.x + (Math.random() - 0.5) * VELOCITY_DRIFT * 0.2;
+          let newVy = blob.velocity.y + (Math.random() - 0.5) * VELOCITY_DRIFT * 0.2;
+
+          // Clamp velocities
+          newVx = Math.max(Math.min(newVx, speed.to), -speed.to);
+          newVy = Math.max(Math.min(newVy, speed.to), -speed.to);
+
+          // Calculate new position
+          let newX = blob.position.x + newVx;
+          let newY = blob.position.y + newVy;
+
+          // Keep within bounds
+          const margin = blob.size.width / 2;
+          const rightBound = container.width - margin;
+          const bottomBound = container.height - margin;
+
+          if (newX < margin) {
+            newX = margin;
+            newVx = Math.abs(newVx);
+          } else if (newX > rightBound) {
+            newX = rightBound;
+            newVx = -Math.abs(newVx);
+          }
+
+          if (newY < margin) {
+            newY = margin;
+            newVy = Math.abs(newVy);
+          } else if (newY > bottomBound) {
+            newY = bottomBound;
+            newVy = -Math.abs(newVy);
+          }
+
+          return {
+            ...blob,
+            position: { x: newX, y: newY },
+            velocity: { x: newVx, y: newVy },
+          };
+        })
       );
-      setBlobs(initialBlobs);
-    }
-  }, [isClient, dimensions, colorScheme, numBlobs]);
+    };
 
-  useEffect(() => {
-    if (isClient) {
-      const updateBlobPositions = () => {
-        setBlobs((prevBlobs) =>
-          prevBlobs.map((blob) => {
-            const newX = blob.x + blob.vx;
-            const newY = blob.y + blob.vy;
-            let newVx = blob.vx + (Math.random() - 0.5) * 0.2; // Random drift in velocity
-            let newVy = blob.vy + (Math.random() - 0.5) * 0.2;
-
-            // Allow blobs to cross fully beyond half their size before bouncing
-            const halfWidth = blob.width / 2;
-            const halfHeight = blob.height / 2;
-
-            if (newX < -halfWidth || newX > dimensions.width + halfWidth) {
-              newVx = -newVx;
-            }
-
-            if (newY < -halfHeight || newY > dimensions.height + halfHeight) {
-              newVy = -newVy;
-            }
-
-            return {
-              ...blob,
-              x: newX,
-              y: newY,
-              vx: newVx,
-              vy: newVy,
-              rotation: blob.rotation + blob.rotationSpeed,
-            };
-          })
-        );
-      };
-
-      const interval = setInterval(updateBlobPositions, 16);
-      return () => clearInterval(interval);
-    }
-  }, [isClient, dimensions]);
-
-  // Conditionally render only after the client environment is confirmed
-  if (!isClient) return null;
+    const interval = setInterval(updateBlobPositions, ANIMATION_FRAME_RATE);
+    return () => clearInterval(interval);
+  }, [container, speed.to]);
 
   return (
-    <svg width="100vw" height="100vh">
-      <defs>
-        {blobs.map((blob) => (
-          <filter
-            key={`shadow-${blob.id}`}
-            id={`blob-shadow-${blob.id}`}
-            x="-50%"
-            y="-50%"
-            width="200%"
-            height="200%"
-          >
-            <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor={blob.color} floodOpacity="0.8" />
-          </filter>
-        ))}
-      </defs>
+    <svg width={container.width} height={container.height}>
       {blobs.map((blob) => (
         <Blob key={blob.id} {...blob} opacity={opacity} />
       ))}

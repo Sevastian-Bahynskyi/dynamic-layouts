@@ -1,6 +1,6 @@
 import { useSquaredLayout } from "./squaredLayoutHook";
 import "../../../index.css";
-import { SquaredLayoutConfig } from "../../props/squaredLayoutConfig";
+import { SquaredLayoutConfig } from "../../types/squaredLayout";
 import { defaultColorScheme } from "../../utils/defaultColorScheme";
 
 const SquaredLayout: React.FC<SquaredLayoutConfig> = ({

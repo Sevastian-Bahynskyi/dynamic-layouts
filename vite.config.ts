@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => {
         plugins: [tailwindcss()],
       },
     },
-    base: isLibrary ? undefined : '/dist/app/',
+    base: "./",
     build: isLibrary
       ? {
         outDir: './dist/lib',
@@ -64,6 +64,8 @@ export default defineConfig(({ mode }) => {
       }
       : {
         outDir: './dist/app',
+        assetsDir: 'assets', // Ensures assets go into `dist/app/assets`
+        emptyOutDir: true,
       },
   };
 });

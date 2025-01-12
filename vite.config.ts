@@ -1,4 +1,3 @@
-// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
@@ -7,50 +6,64 @@ import { resolve } from 'path';
 import tailwindcss from "tailwindcss";
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
-const isLibrary = process.env.BUILD_LIB === 'true';
+export default defineConfig(({ mode }) => {
+  const isLibrary = mode === 'lib';
 
-export default defineConfig({
-  plugins: [react(), 
-    dts({
-      tsconfigPath: './tsconfig.app.json',
-      outDir: './dist/lib',
-      insertTypesEntry: true,
-      copyDtsFiles: true,
-    }),
-    libInjectCss()
-],
-  css: {
-    postcss: {
-      plugins: [tailwindcss()],
+  return {
+    plugins: [
+      react(),
+      ...(isLibrary
+        ? [
+          dts({
+            tsconfigPath: './tsconfig.build.json',
+            outDir: './dist/lib/types',
+            insertTypesEntry: true,
+            copyDtsFiles: false,
+            // Only emit declarations when building library
+            beforeWriteFile: (filePath, content) => {
+              if (!isLibrary) {
+                return false;
+              }
+              return { filePath, content };
+            },
+          }),
+          libInjectCss(),
+        ]
+        : []),
+    ],
+    css: {
+      postcss: {
+        plugins: [tailwindcss()],
+      },
     },
-  },
-  base: isLibrary ? undefined : '/dynamic-layouts/',
-  build: isLibrary
-    ? {
-      outDir: './dist/lib',
+    base: isLibrary ? undefined : '/dist/app/',
+    build: isLibrary
+      ? {
+        outDir: './dist/lib',
         lib: {
           entry: resolve(__dirname, './index.ts'),
-          name: 'SquaredLayout',  
+          name: 'DynamicLayouts',
           fileName: (format) => `index.${format}.js`,
-          formats: ["cjs", "es"]
+          formats: ['cjs', 'es'],
         },
         cssCodeSplit: true,
         rollupOptions: {
           external: [...Object.keys(peerDependencies)],
           output: {
             globals: {
-              react: "React",
-              "react-dom": "ReactDOM",
-              tailwindcss: "tailwindcss",
-              assetFileNames: './index.css'
+              react: 'React',
+              'react-dom': 'ReactDOM',
+              tailwindcss: 'tailwindcss',
             },
-            preserveModules: false
+            assetFileNames: 'index.css',
           },
+          preserveModules: false,
         },
         sourcemap: true,
         emptyOutDir: true,
       }
-    : {
-        outDir: './dist/app',   
-    },
+      : {
+        outDir: './dist/app',
+      },
+  };
 });

@@ -6,6 +6,7 @@
   "files": [
     "/dist/lib"
   ],
+  "types": "./dist/lib/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/lib/index.d.ts",
@@ -15,8 +16,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build:lib": "tsc -b && BUILD_LIB=true vite build",
-    "build:app": "tsc -b && vite build",
+    "build:lib": "tsc -b &&  vite build --mode lib",
+    "build:app": "tsc -b && vite build --mode app",
     "lint": "eslint .",
     "preview": "vite preview",
     "release": "semantic-release"

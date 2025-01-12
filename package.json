@@ -9,7 +9,7 @@
   "types": "./dist/lib/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/lib/index.d.ts",
+      "types": "./dist/lib/types/index.d.ts",
       "import": "./dist/lib/index.es.js",
       "require": "./dist/lib/index.cjs.js"
     }

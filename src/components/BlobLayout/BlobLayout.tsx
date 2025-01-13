@@ -20,7 +20,11 @@ const createBlob = (
 ): BlobConfig => {
   const size = randomNum(sizeRange.from, sizeRange.to);
   const direction = Math.random() > 0.5 ? 1 : -1;
-  const possibleColors = colorScheme.filter((color) => !usedColors.has(color));
+  let possibleColors = colorScheme.filter((color) => !usedColors.has(color));
+  if (possibleColors.length === 0) {
+    usedColors.clear();
+    possibleColors = colorScheme;
+  }
   const color = randomString(possibleColors);
 
   // Add the selected color to the usedColors set

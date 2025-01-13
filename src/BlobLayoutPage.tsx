@@ -15,4 +15,4 @@ const BlobLayoutPage: React.FC = () => {
       );
 };
 
-export  { BlobLayoutPage };
+export  default BlobLayoutPage;

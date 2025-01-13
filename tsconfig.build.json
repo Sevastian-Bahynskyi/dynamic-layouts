@@ -1,10 +1,15 @@
 {
-    "extends": "./tsconfig.base.json",
-    "compilerOptions": {
-      "declaration": true,
-      "emitDeclarationOnly": true,
-      "outDir": "./dist/lib/types"
-    },
-    "include": ["src", "index.ts"],
-    "exclude": ["src/*.tsx"]
-  }
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist/lib/types"
+  },
+  "include": ["src", "index.ts"],
+  "exclude": [
+    "src/*.tsx",
+    "src/components/TabNavigation/**/*",
+    "src/types/base.ts",
+    "src/utils/**/*"
+  ]
+}

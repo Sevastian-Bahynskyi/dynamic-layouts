@@ -64,7 +64,7 @@ export default defineConfig(({ mode }) => {
       }
       : {
         outDir: './dist/app',
-        assetsDir: 'assets', // Ensures assets go into `dist/app/assets`
+        assetsDir: 'assets',
         emptyOutDir: true,
       },
   };

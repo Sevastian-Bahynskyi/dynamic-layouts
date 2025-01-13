@@ -9,4 +9,5 @@ export interface BlobLayoutConfig {
   speed?: FromTo;
   rotationSpeed?: FromTo;
   morphing?: { speed: FromTo; intensity: FromTo };
+  backgroundColor?: string;
 }

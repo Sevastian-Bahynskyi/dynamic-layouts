@@ -60,6 +60,7 @@ const BlobLayout: FC<BlobLayoutConfig> = ({
     speed: { from: 4, to: 12 }, 
     intensity: { from: 0.2, to: 0.8 }
   },
+  backgroundColor = "#043f70"
 }: BlobLayoutConfig) => {
   const [blobs, setBlobs] = useState<BlobConfig[]>([]);
 
@@ -121,7 +122,7 @@ const BlobLayout: FC<BlobLayoutConfig> = ({
   }, [container, speed.to]);
 
   return (
-    <svg width={container.width} height={container.height}>
+    <svg width={container.width} height={container.height} style={{ backgroundColor: backgroundColor }}>
       {blobs.map((blob) => (
         <Blob key={blob.id} {...blob} opacity={opacity} />
       ))}

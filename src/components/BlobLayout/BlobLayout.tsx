@@ -60,8 +60,8 @@ const BlobLayout: FC<BlobLayoutConfig> = ({
   speed = { from: 2, to: 6 },
   rotationSpeed = { from: -0.3, to: 2 },
   container,
-  morphing = { 
-    speed: { from: 4, to: 12 }, 
+  morphing = {
+    speed: { from: 4, to: 12 },
     intensity: { from: 0.2, to: 0.8 }
   },
   backgroundColor = "#043f70"
@@ -134,5 +134,5 @@ const BlobLayout: FC<BlobLayoutConfig> = ({
   );
 };
 
-export { BlobLayout };
+export { BlobLayout, Blob };
 export type { BlobLayoutConfig };

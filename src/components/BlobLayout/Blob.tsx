@@ -43,19 +43,19 @@ const Blob: React.FC<BlobConfig> = (props) => {
             Math.sin(angle) * 2 + time * 0.3,
             props.seed
           ) *
-            0.5 +
+          0.5 +
           noise2D(
             Math.cos(angle) * 4 + time * 0.2,
             Math.sin(angle) * 4 + time * 0.2,
             props.seed + 1000
           ) *
-            0.3 +
+          0.3 +
           noise2D(
             Math.cos(angle) * 8 + time * 0.1,
             Math.sin(angle) * 8 + time * 0.1,
             props.seed + 2000
           ) *
-            0.2;
+          0.2;
 
         const radius = baseRadius * (1 + noiseValue * props.morphIntensity);
         points.push([
@@ -89,5 +89,5 @@ const Blob: React.FC<BlobConfig> = (props) => {
   );
 };
 
-export  default Blob;
+export default Blob;
 export type { BlobConfig };
